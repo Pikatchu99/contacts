@@ -3,12 +3,15 @@ from flask import Blueprint, request
 import jwt, json
 from ..utils import *
 from .contactInterface import ContactInterface
+from flask_cors import cross_origin
+
 
 # Création d'un Blueprint pour les requêtes relatives aux contacts
 CONTACT_REQUEST = Blueprint('contact', __name__)
 
 # Route pour la création d'un contact
 @CONTACT_REQUEST.route('/create', methods=['POST'])
+@cross_origin() 
 def create():
     try:
         datas = request.get_json(force=True)  # Récupère les données JSON envoyées avec la requête
@@ -21,6 +24,7 @@ def create():
 
 # Route pour la mise à jour d'un contact
 @CONTACT_REQUEST.route('/update', methods=['PUT'])
+@cross_origin() 
 def update():
     try:
         datas = request.get_json(force=True)  # Récupère les données JSON envoyées avec la requête
@@ -36,6 +40,7 @@ def update():
 
 # Route pour la suppression d'un contact
 @CONTACT_REQUEST.route('/delete', methods=['DELETE'])
+@cross_origin() 
 def delete():
     try:
         datas = request.get_json(force=True)  # Récupère les données JSON envoyées avec la requête
@@ -48,6 +53,7 @@ def delete():
 
 # Route pour obtenir un contact spécifique
 @CONTACT_REQUEST.route('/get', methods=['GET'])
+@cross_origin() 
 def get_contact():
     try:
         datas = request.args.to_dict()  # Récupère les paramètres de la requête GET
@@ -60,6 +66,7 @@ def get_contact():
 
 # Route pour obtenir tous les contacts
 @CONTACT_REQUEST.route('/get/all', methods=['GET'])
+@cross_origin() 
 def get_contact_all():
     try:
         contact = ContactInterface()  # Initialise l'interface de contact sans filtre
